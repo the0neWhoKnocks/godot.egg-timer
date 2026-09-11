@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://brb4rbxjomral"]
+
+[ext_resource type="Script" uid="uid://7to4ji0lsty3" path="res://scripts/timer_form.gd" id="1_0wu41"]
+[ext_resource type="Theme" uid="uid://bpkf7082kgrwt" path="res://themes/digi_spinbox.theme" id="2_dmsei"]
+[ext_resource type="Script" uid="uid://d2mtokbbrbcpm" path="res://scripts/PaddedSpinBox.gd" id="3_awiwq"]
+[ext_resource type="Theme" uid="uid://b4m2q3ocpcidy" path="res://themes/font_icons.theme" id="3_cl6f3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6d74"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.5058824)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_awiwq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.50980395)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cl6f3"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.49803922)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="App" type="PanelContainer" unique_id=1200191938]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Body" type="VBoxContainer" parent="." unique_id=27218072]
+layout_mode = 2
+
+[node name="TimerFormSpacing" type="MarginContainer" parent="Body" unique_id=91129194]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TimerForm" type="HBoxContainer" parent="Body/TimerFormSpacing" unique_id=927031890]
+layout_mode = 2
+script = ExtResource("1_0wu41")
+
+[node name="TimerColorPickerBtn" type="ColorPickerButton" parent="Body/TimerFormSpacing/TimerForm" unique_id=1684164391]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_k6d74")
+edit_alpha = false
+edit_intensity = false
+
+[node name="TimerNameLabel" type="Label" parent="Body/TimerFormSpacing/TimerForm" unique_id=287905674]
+layout_mode = 2
+text = "Name:"
+
+[node name="TimerNameInput" type="LineEdit" parent="Body/TimerFormSpacing/TimerForm" unique_id=974904941]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_awiwq")
+
+[node name="HoursInput" type="SpinBox" parent="Body/TimerFormSpacing/TimerForm" unique_id=1948201339]
+layout_mode = 2
+theme = ExtResource("2_dmsei")
+max_value = 24.0
+alignment = 1
+script = ExtResource("3_awiwq")
+metadata/_custom_type_script = "uid://d2mtokbbrbcpm"
+
+[node name="Colon1" type="Label" parent="Body/TimerFormSpacing/TimerForm" unique_id=241902242]
+layout_mode = 2
+text = ":"
+
+[node name="MinutesInput" type="SpinBox" parent="Body/TimerFormSpacing/TimerForm" unique_id=1435598311]
+layout_mode = 2
+theme = ExtResource("2_dmsei")
+max_value = 59.0
+alignment = 1
+script = ExtResource("3_awiwq")
+metadata/_custom_type_script = "uid://d2mtokbbrbcpm"
+
+[node name="Colon2" type="Label" parent="Body/TimerFormSpacing/TimerForm" unique_id=234184751]
+layout_mode = 2
+text = ":"
+
+[node name="SecondsInput" type="SpinBox" parent="Body/TimerFormSpacing/TimerForm" unique_id=468130207]
+layout_mode = 2
+theme = ExtResource("2_dmsei")
+max_value = 59.0
+alignment = 1
+script = ExtResource("3_awiwq")
+metadata/_custom_type_script = "uid://d2mtokbbrbcpm"
+
+[node name="CtrlBtn" type="Button" parent="Body/TimerFormSpacing/TimerForm" unique_id=591040069]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("3_cl6f3")
+text = "+"
+
+[node name="TimersSpacing" type="MarginContainer" parent="Body" unique_id=39622497]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TimersScroller" type="ScrollContainer" parent="Body/TimersSpacing" unique_id=1430114876]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_cl6f3")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="TimersList" type="VBoxContainer" parent="Body/TimersSpacing/TimersScroller" unique_id=864345354]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="picker_created" from="Body/TimerFormSpacing/TimerForm/TimerColorPickerBtn" to="Body/TimerFormSpacing/TimerForm" method="_on_color_picker_created"]
