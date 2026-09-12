@@ -26,3 +26,6 @@ func _update_display(val: float) -> void:
   # applied. Once I switched to `call_deferred` it was consistently formatted. Oddly, I have to use
   # it in combination with `CONNECT_DEFERRED`, otherwise I get the same inconsistent result.
   get_line_edit().call_deferred(&"set_text", str(int(val)).pad_zeros(total_digits))
+
+func get_text() -> int:
+  return int(get_line_edit().text)

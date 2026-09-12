@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cqiet3i1yyspc"]
 
-[ext_resource type="Script" uid="uid://cxi41ctax7cg7" path="res://scripts/timer.gd" id="1_5lxq6"]
-[ext_resource type="Theme" uid="uid://b4m2q3ocpcidy" path="res://themes/font_icons.theme" id="2_g5y8c"]
-[ext_resource type="FontFile" uid="uid://cs1kvw2o4ps8g" path="res://assets/fonts/DigitalDisplayRegular-ODEO.ttf" id="3_g5y8c"]
+[ext_resource type="Script" uid="uid://cxi41ctax7cg7" path="res://scripts/egg_timer.gd" id="1_icbje"]
+[ext_resource type="Theme" uid="uid://b4m2q3ocpcidy" path="res://themes/font_icons.theme" id="2_qm8qp"]
+[ext_resource type="FontFile" uid="uid://cs1kvw2o4ps8g" path="res://assets/fonts/DigitalDisplayRegular-ODEO.ttf" id="3_nsx2x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nws1w"]
 content_margin_left = 3.0
@@ -31,14 +31,14 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Timer" type="PanelContainer" unique_id=478006003]
+[node name="EggTimer" type="PanelContainer" unique_id=478006003]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 40.0
 grow_horizontal = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_nws1w")
-script = ExtResource("1_5lxq6")
+script = ExtResource("1_icbje")
 
 [node name="Spacing" type="MarginContainer" parent="." unique_id=1777485865]
 layout_mode = 2
@@ -56,12 +56,12 @@ layout_mode = 2
 
 [node name="CtrlBtn" type="Button" parent="Spacing/Row" unique_id=1395826939]
 layout_mode = 2
-theme = ExtResource("2_g5y8c")
+theme = ExtResource("2_qm8qp")
 text = ""
 
 [node name="TimeDisplay" type="Label" parent="Spacing/Row" unique_id=48986565]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_g5y8c")
+theme_override_fonts/font = ExtResource("3_nsx2x")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_8bg7t")
 text = "00:00:00"
@@ -77,10 +77,10 @@ size_flags_horizontal = 3
 
 [node name="EditBtn" type="Button" parent="Spacing/Row" unique_id=1521095991]
 layout_mode = 2
-theme = ExtResource("2_g5y8c")
+theme = ExtResource("2_qm8qp")
 text = ""
 
 [node name="DeleteBtn" type="Button" parent="Spacing/Row" unique_id=685540929]
 layout_mode = 2
-theme = ExtResource("2_g5y8c")
+theme = ExtResource("2_qm8qp")
 text = ""
