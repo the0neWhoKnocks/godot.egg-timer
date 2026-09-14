@@ -26,6 +26,7 @@ var timer_running: bool = false
 var timer_txt_color: Color
 var timer_txt_color_dim: Color
 var total_seconds: int = 0
+var uid: String
 
 @onready var color_chip: Panel = $Spacing/Row/ColorChip
 @onready var ctrl_btn: Button = $Spacing/Row/CtrlBtn
@@ -49,6 +50,7 @@ static func create(
   timer.hours = _hours
   timer.minutes = _minutes
   timer.seconds = _seconds
+  timer.uid = Utils.gen_uuid4()
   return timer
 
 
