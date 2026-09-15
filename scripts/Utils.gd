@@ -1,5 +1,21 @@
 class_name Utils extends Node
 
+static func add_btn_style_override(node: Node, btn_color: String) -> void:
+  var style1 = node.get_theme_stylebox("normal").duplicate()
+  var style2 = node.get_theme_stylebox("pressed").duplicate()
+  style1.bg_color = Color(btn_color)
+  style2.bg_color = Color(str(btn_color, "CC")) # add opacity
+  node.add_theme_stylebox_override("normal", style1)
+  node.add_theme_stylebox_override("focus", style2)
+  node.add_theme_stylebox_override("hover", style2)
+  node.add_theme_stylebox_override("pressed", style2)
+
+static func remove_btn_style_override(node: Node) -> void:
+  node.remove_theme_stylebox_override("normal")
+  node.remove_theme_stylebox_override("focus")
+  node.remove_theme_stylebox_override("hover")
+  node.remove_theme_stylebox_override("pressed")
+
 static func gen_uuid4() -> String:
   const UUID_CHARS = "0123456789abcdef"
   var result: String = ""

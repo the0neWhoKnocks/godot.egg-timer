@@ -43,6 +43,7 @@ static func create(
   _hours: int,
   _minutes: int,
   _seconds: int,
+  _uid: String = "",
 ) -> EggTimer:
   var timer = EGG_TIMER.instantiate()
   timer.color = _color
@@ -50,27 +51,27 @@ static func create(
   timer.hours = _hours
   timer.minutes = _minutes
   timer.seconds = _seconds
-  timer.uid = Utils.gen_uuid4()
+  timer.uid = _uid if _uid != "" else Utils.gen_uuid4()
   return timer
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-  var chip_style = color_chip.get_theme_stylebox("panel").duplicate()
-  chip_style.bg_color = Color(color)
-  color_chip.add_theme_stylebox_override("panel", chip_style)
+  _render_ui()
   
-  update_ctrl_styles()
-  timer_txt_color = time_display.get_theme_color("font_color")
-  timer_txt_color_dim = Color(timer_txt_color, 0.5)
   ctrl_btn.pressed.connect(_on_ctrl_btn_press)
-  
-  update_display(hours, minutes, seconds)
-  timer_name.text = label
-  delete_btn.text = Constants.ICON__DELETE
-  edit_btn.text = Constants.ICON__EDIT
-  
-  total_seconds = (hours * 3600) + (minutes * 60) + seconds
+  edit_btn.pressed.connect(_on_edit_btn_press)
+  App.config.timer_config_changed.connect(_on_config_change)
+
+
+func _on_config_change(conf_uid: String, conf_data: Dictionary) -> void:
+  if conf_uid == uid:
+    color = conf_data["color"]
+    label = conf_data["name"]
+    hours = conf_data["hours"]
+    minutes = conf_data["mins"]
+    seconds = conf_data["secs"]
+    _render_ui()
 
 
 func _on_ctrl_btn_press() -> void:
@@ -86,9 +87,30 @@ func _on_ctrl_btn_press() -> void:
     update_display(hours, minutes, seconds)
 
 
+func _on_edit_btn_press() -> void:
+  App.edit_timer.emit(uid)
+
+
 func _process(delta: float) -> void:
   render_timer(delta)
   render_blink(delta)
+
+
+func _render_ui() -> void:
+  var chip_style: StyleBox = color_chip.get_theme_stylebox("panel").duplicate()
+  chip_style.bg_color = Color(color)
+  color_chip.add_theme_stylebox_override("panel", chip_style)
+  
+  update_ctrl_styles()
+  timer_txt_color = time_display.get_theme_color("font_color")
+  timer_txt_color_dim = Color(timer_txt_color, 0.5)
+  
+  update_display(hours, minutes, seconds)
+  timer_name.text = label
+  edit_btn.text = Constants.ICON__EDIT
+  delete_btn.text = Constants.ICON__DELETE
+  
+  total_seconds = (hours * 3600) + (minutes * 60) + seconds
 
 
 func render_blink(delta: float) -> void:
@@ -121,14 +143,7 @@ func render_timer(delta: float) -> void:
 
 func update_ctrl_styles() -> void:
   var styles = ctrl_styles["stop"] if timer_running else ctrl_styles["play"]
-  var style1 = ctrl_btn.get_theme_stylebox("normal").duplicate()
-  var style2 = ctrl_btn.get_theme_stylebox("pressed").duplicate()
-  style1.bg_color = Color(styles["color"])
-  style2.bg_color = Color(str(styles["color"], "CC")) # add opacity
-  ctrl_btn.add_theme_stylebox_override("normal", style1)
-  ctrl_btn.add_theme_stylebox_override("focus", style2)
-  ctrl_btn.add_theme_stylebox_override("hover", style2)
-  ctrl_btn.add_theme_stylebox_override("pressed", style2)
+  Utils.add_btn_style_override(ctrl_btn, styles["color"])
   ctrl_btn.text = styles["icon"]
 
 
