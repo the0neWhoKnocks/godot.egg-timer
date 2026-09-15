@@ -61,6 +61,7 @@ func _ready() -> void:
   
   ctrl_btn.pressed.connect(_on_ctrl_btn_press)
   edit_btn.pressed.connect(_on_edit_btn_press)
+  delete_btn.pressed.connect(_on_delete_btn_press)
   App.config.timer_config_changed.connect(_on_config_change)
 
 
@@ -85,6 +86,11 @@ func _on_ctrl_btn_press() -> void:
     prev_blink_secs = 0
     time_display.add_theme_color_override("font_color", timer_txt_color)
     update_display(hours, minutes, seconds)
+
+
+func _on_delete_btn_press() -> void:
+  App.config.delete_timer(uid)
+  queue_free()
 
 
 func _on_edit_btn_press() -> void:

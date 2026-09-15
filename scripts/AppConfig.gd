@@ -11,6 +11,10 @@ func _init() -> void:
   else: timers = data["timers"]
 
 
+func delete_timer(uid: String) -> void:
+  if timers.erase(uid): save_file()
+
+
 func get_timer(uid: String) -> Dictionary:
   return timers[uid]
 
