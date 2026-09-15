@@ -24,6 +24,8 @@ func _ready() -> void:
     var timer = App.config.get_timer(_uid)
     _add_timer(_uid, timer)
   
+  _sort_timers()
+  
   App.edit_timer.connect(_on_edit)
   
   
@@ -103,12 +105,13 @@ func _on_ctrl_button_pressed() -> void:
     _update_ctrl_btn()
   
   App.config.set_timer(_uid, payload, changed)
+  _sort_timers()
 
 
 func _on_edit(_uid: String) -> void:
   uid = _uid
   
-  var timer_conf = App.config.get_timer(uid)
+  var timer_conf: Dictionary = App.config.get_timer(uid)
   
   color_picker_btn.color = timer_conf["color"]
   timer_name_input.text = timer_conf["name"]
@@ -117,6 +120,23 @@ func _on_edit(_uid: String) -> void:
   seconds_input.value = timer_conf["secs"]
   
   _update_ctrl_btn()
+
+
+func _sort_timers() -> void:
+  var timers: Array = timers_list.get_children()
+  var sorted_timers: Array = []
+  
+  for timer in timers:
+    sorted_timers.push_front(timer)
+  
+  sorted_timers.sort_custom(func(timer_a, timer_b):
+    return timer_a.label.naturalnocasecmp_to(timer_b.label) < 0
+  )
+  
+  for ndx in range(sorted_timers.size()):
+    var timer: EggTimer = sorted_timers[ndx]
+    timers_list.move_child(timer, ndx)
+  
 
 
 func _update_ctrl_btn() -> void:
