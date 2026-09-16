@@ -2,6 +2,8 @@ extends HBoxContainer
 
 var color: String = Constants.DEFAULT__TIMER_COLOR
 var ctrl_disabled: bool = true
+var debounced_validate: Callable
+var input_debounce: Debounce
 var uid: String = ""
 
 @onready var color_picker_btn: ColorPickerButton = $TimerColorPickerBtn
@@ -13,11 +15,13 @@ var uid: String = ""
 @onready var timers_list: VBoxContainer = %TimersList
 
 func _ready() -> void:
+  input_debounce = Debounce.new()
+  debounced_validate = input_debounce.init(self, _validate, 0.1)
+  
   color_picker_btn.color = color
   color_picker_btn.color_changed.connect(_on_color_changed)
   
   _update_ctrl_btn()
-  #ctrl_btn.disabled = ctrl_disabled # TODO enable when inputs have values
   ctrl_btn.pressed.connect(_on_ctrl_button_pressed)
   
   for _uid in App.config.timers:
@@ -26,6 +30,10 @@ func _ready() -> void:
   
   _sort_timers()
   
+  timer_name_input.text_changed.connect(debounced_validate)
+  hours_input.value_changed.connect(debounced_validate)
+  minutes_input.value_changed.connect(debounced_validate)
+  seconds_input.value_changed.connect(debounced_validate)
   App.edit_timer.connect(_on_edit)
   
   
@@ -136,7 +144,6 @@ func _sort_timers() -> void:
   for ndx in range(sorted_timers.size()):
     var timer: EggTimer = sorted_timers[ndx]
     timers_list.move_child(timer, ndx)
-  
 
 
 func _update_ctrl_btn() -> void:
@@ -146,3 +153,12 @@ func _update_ctrl_btn() -> void:
   else:
     ctrl_btn.text = Constants.ICON__SAVE
     Utils.add_btn_style_override(ctrl_btn, "#3e9881")
+  
+  _validate()
+
+
+func _validate(..._args) -> void:
+  if timer_name_input.text != "" || hours_input.value + minutes_input.value + seconds_input.value > 0:
+    ctrl_btn.disabled = false
+  else:
+    ctrl_btn.disabled = true

@@ -1,5 +1,7 @@
 class_name Utils extends Node
 
+# ------------------------------------------------------------------------------
+
 static func add_btn_style_override(node: Node, btn_color: String) -> void:
   var style1 = node.get_theme_stylebox("normal").duplicate()
   var style2 = node.get_theme_stylebox("pressed").duplicate()
@@ -15,6 +17,8 @@ static func remove_btn_style_override(node: Node) -> void:
   node.remove_theme_stylebox_override("focus")
   node.remove_theme_stylebox_override("hover")
   node.remove_theme_stylebox_override("pressed")
+
+# ------------------------------------------------------------------------------
 
 static func gen_uuid4() -> String:
   const UUID_CHARS = "0123456789abcdef"
@@ -37,6 +41,7 @@ static func gen_uuid4() -> String:
             
   return result
 
+# ------------------------------------------------------------------------------
 
 static func get_user_app_data_path() -> String:
   var HOME: String = get_user_home_path()
@@ -61,3 +66,5 @@ static func get_user_home_path() -> String:
   elif OS.has_environment("USERPROFILE"):
     return OS.get_environment("USERPROFILE") # Windows
   return ""
+
+# ------------------------------------------------------------------------------
