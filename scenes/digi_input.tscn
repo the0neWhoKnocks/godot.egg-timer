@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://sc2hkkrqud8f"]
+
+[ext_resource type="Script" uid="uid://rg0rcoltavub" path="res://scripts/DigiInput.gd" id="1_6ko8a"]
+[ext_resource type="Theme" uid="uid://b4m2q3ocpcidy" path="res://themes/font_icons.theme" id="1_d731g"]
+[ext_resource type="FontFile" uid="uid://cs1kvw2o4ps8g" path="res://assets/fonts/DigitalDisplayRegular-ODEO.ttf" id="2_ooi2l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llela"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ko8a"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[node name="DigiInput" type="HBoxContainer" unique_id=83131873]
+offset_right = 112.0
+offset_bottom = 23.0
+theme_override_constants/separation = 0
+script = ExtResource("1_6ko8a")
+
+[node name="SubBtn" type="Button" parent="." unique_id=2001673604]
+layout_mode = 2
+theme = ExtResource("1_d731g")
+theme_override_styles/normal = SubResource("StyleBoxFlat_llela")
+text = "-"
+
+[node name="NumInput" type="LineEdit" parent="." unique_id=415983514]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ooi2l")
+theme_override_font_sizes/font_size = 22
+text = "00"
+alignment = 1
+
+[node name="AddBtn" type="Button" parent="." unique_id=179590527]
+layout_mode = 2
+theme = ExtResource("1_d731g")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6ko8a")
+text = "+"

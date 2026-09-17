@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://brb4rbxjomral"]
 
 [ext_resource type="Script" uid="uid://7to4ji0lsty3" path="res://scripts/timer_form.gd" id="1_0wu41"]
+[ext_resource type="PackedScene" uid="uid://sc2hkkrqud8f" path="res://scenes/digi_input.tscn" id="2_awiwq"]
 [ext_resource type="Theme" uid="uid://bpkf7082kgrwt" path="res://themes/digi_spinbox.theme" id="2_dmsei"]
 [ext_resource type="Script" uid="uid://d2mtokbbrbcpm" path="res://scripts/PaddedSpinBox.gd" id="3_awiwq"]
 [ext_resource type="Theme" uid="uid://b4m2q3ocpcidy" path="res://themes/font_icons.theme" id="3_cl6f3"]
@@ -82,6 +83,9 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_awiwq")
+
+[node name="DigiInput" parent="Body/TimerFormSpacing/TimerForm" unique_id=83131873 instance=ExtResource("2_awiwq")]
+layout_mode = 2
 
 [node name="HoursInput" type="SpinBox" parent="Body/TimerFormSpacing/TimerForm" unique_id=1948201339]
 layout_mode = 2
