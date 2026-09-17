@@ -32,7 +32,7 @@ var uid: String
 @onready var ctrl_btn: Button = $Spacing/Row/CtrlBtn
 @onready var delete_btn: Button = $Spacing/Row/DeleteBtn
 @onready var edit_btn: Button = $Spacing/Row/EditBtn
-@onready var time_display: Label = $Spacing/Row/TimeDisplay
+@onready var time_display: Label = $Spacing/Row/TimeDisplayContainer/TimeDisplay
 @onready var timer_name: Label = $Spacing/Row/TimerName
 
 
