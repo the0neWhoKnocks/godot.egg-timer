@@ -1,6 +1,10 @@
+@tool
 class_name PaddedSpinBox extends SpinBox
 
-@export var total_digits: int = 2  # Number of digits to pad with zeros
+@export var total_digits: int = 2:  # Number of digits to pad with zeros
+  set(new_total):
+    total_digits = new_total
+    _update_display(value)
 
 func _ready() -> void:
   # Connect signals. `value` is for normal changes, but the `focus` events are needed otherwise the
