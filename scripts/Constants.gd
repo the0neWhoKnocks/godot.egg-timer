@@ -1,5 +1,7 @@
 class_name Constants extends RefCounted
 
+const BTN_COLOR__DEFAULT = "#208adc"
+
 const DEFAULT__TIMER_COLOR = "#00C487"
 
 # Download font from: https://github.com/FortAwesome/Font-Awesome/releases (Currently: 7.3.1) (Choose the `desktop` version)

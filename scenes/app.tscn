@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://brb4rbxjomral"]
 
 [ext_resource type="Script" uid="uid://7to4ji0lsty3" path="res://scripts/timer_form.gd" id="1_0wu41"]
-[ext_resource type="Theme" uid="uid://bpkf7082kgrwt" path="res://themes/digi_spinbox.theme" id="2_dmsei"]
+[ext_resource type="PackedScene" uid="uid://sc2hkkrqud8f" path="res://scenes/digi_input.tscn" id="2_awiwq"]
 [ext_resource type="Script" uid="uid://d2mtokbbrbcpm" path="res://scripts/PaddedSpinBox.gd" id="3_awiwq"]
-[ext_resource type="Theme" uid="uid://b4m2q3ocpcidy" path="res://themes/font_icons.theme" id="3_cl6f3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6d74"]
 content_margin_left = 4.0
@@ -16,17 +15,16 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_awiwq"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 0.50980395)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_llela"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmsei"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cl6f3"]
 content_margin_left = 4.0
@@ -34,11 +32,11 @@ content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 0.49803922)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -64,6 +62,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="TimerForm" type="HBoxContainer" parent="Body/TimerFormSpacing" unique_id=927031890]
 layout_mode = 2
+theme_override_constants/separation = 0
 script = ExtResource("1_0wu41")
 
 [node name="TimerColorPickerBtn" type="ColorPickerButton" parent="Body/TimerFormSpacing/TimerForm" unique_id=1684164391]
@@ -73,6 +72,11 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_k6d74")
 edit_alpha = false
 edit_intensity = false
 
+[node name="Spacer" type="Panel" parent="Body/TimerFormSpacing/TimerForm" unique_id=1539364562]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_llela")
+
 [node name="TimerNameLabel" type="Label" parent="Body/TimerFormSpacing/TimerForm" unique_id=287905674]
 layout_mode = 2
 text = "Name:"
@@ -81,11 +85,19 @@ text = "Name:"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_awiwq")
+
+[node name="Spacer2" type="Panel" parent="Body/TimerFormSpacing/TimerForm" unique_id=967752659]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_llela")
+
+[node name="DigiInput" parent="Body/TimerFormSpacing/TimerForm" unique_id=2088483096 instance=ExtResource("2_awiwq")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dmsei")
 
 [node name="HoursInput" type="SpinBox" parent="Body/TimerFormSpacing/TimerForm" unique_id=1948201339]
+visible = false
 layout_mode = 2
-theme = ExtResource("2_dmsei")
 max_value = 24.0
 alignment = 1
 script = ExtResource("3_awiwq")
@@ -97,7 +109,6 @@ text = ":"
 
 [node name="MinutesInput" type="SpinBox" parent="Body/TimerFormSpacing/TimerForm" unique_id=1435598311]
 layout_mode = 2
-theme = ExtResource("2_dmsei")
 max_value = 59.0
 alignment = 1
 script = ExtResource("3_awiwq")
@@ -109,16 +120,20 @@ text = ":"
 
 [node name="SecondsInput" type="SpinBox" parent="Body/TimerFormSpacing/TimerForm" unique_id=468130207]
 layout_mode = 2
-theme = ExtResource("2_dmsei")
 max_value = 59.0
 alignment = 1
 script = ExtResource("3_awiwq")
 metadata/_custom_type_script = "uid://d2mtokbbrbcpm"
 
+[node name="Spacer3" type="Panel" parent="Body/TimerFormSpacing/TimerForm" unique_id=1078795517]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_llela")
+
 [node name="CtrlBtn" type="Button" parent="Body/TimerFormSpacing/TimerForm" unique_id=591040069]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
-theme = ExtResource("3_cl6f3")
+theme_type_variation = &"FontIconButton"
 text = "+"
 
 [node name="TimersSpacing" type="MarginContainer" parent="Body" unique_id=39622497]
@@ -137,7 +152,13 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_cl6f3")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="TimersList" type="VBoxContainer" parent="Body/TimersSpacing/TimersScroller" unique_id=864345354]
+[node name="MarginContainer" type="MarginContainer" parent="Body/TimersSpacing/TimersScroller" unique_id=1275079295]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 5
+
+[node name="TimersList" type="VBoxContainer" parent="Body/TimersSpacing/TimersScroller/MarginContainer" unique_id=864345354]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

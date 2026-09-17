@@ -18,6 +18,42 @@ static func remove_btn_style_override(node: Node) -> void:
   node.remove_theme_stylebox_override("hover")
   node.remove_theme_stylebox_override("pressed")
 
+static func dupe_stylebox(node: Node, state: String, states: Array[String]) -> void:
+  var sb: StyleBoxFlat = node.get_theme_stylebox(state).duplicate()
+  for st in states:
+    node.add_theme_stylebox_override(st, sb)
+
+enum StyleBoxState {
+  DISABLED,
+  FOCUS,
+  HOVER,
+  NORMAL,
+  PANEL,
+  PRESSED,
+}
+const STYLEBOX_STATES = {
+  StyleBoxState.DISABLED: &"disabled",
+  StyleBoxState.FOCUS: &"focus",
+  StyleBoxState.HOVER: &"hover",
+  StyleBoxState.NORMAL: &"normal",
+  StyleBoxState.PANEL: &"panel",
+  StyleBoxState.PRESSED: &"pressed",
+}
+static func update_stylebox(
+  states: Array[StyleBoxState],
+  nodes_n_props: Array,
+  val,
+):
+  var sb: StyleBoxFlat
+  for arr in nodes_n_props:
+    var node: Node = arr[0]
+    var props: Array = arr[1]
+    for state in states:
+      if node && node.has_theme_stylebox_override(STYLEBOX_STATES[state]):
+        sb = node.get_theme_stylebox(STYLEBOX_STATES[state])
+        for prop in props:
+          sb[prop] = val
+
 # ------------------------------------------------------------------------------
 
 static func gen_uuid4() -> String:

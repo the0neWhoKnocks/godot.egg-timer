@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cqiet3i1yyspc"]
 
 [ext_resource type="Script" uid="uid://cxi41ctax7cg7" path="res://scripts/egg_timer.gd" id="1_icbje"]
-[ext_resource type="Theme" uid="uid://b4m2q3ocpcidy" path="res://themes/font_icons.theme" id="2_qm8qp"]
 [ext_resource type="FontFile" uid="uid://cs1kvw2o4ps8g" path="res://assets/fonts/DigitalDisplayRegular-ODEO.ttf" id="3_nsx2x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nws1w"]
@@ -67,7 +66,7 @@ layout_mode = 2
 
 [node name="CtrlBtn" type="Button" parent="Spacing/Row" unique_id=1395826939]
 layout_mode = 2
-theme = ExtResource("2_qm8qp")
+theme_type_variation = &"FontIconButton"
 text = ""
 
 [node name="TimeDisplayContainer" type="PanelContainer" parent="Spacing/Row" unique_id=1777861067]
@@ -100,10 +99,10 @@ size_flags_horizontal = 3
 
 [node name="EditBtn" type="Button" parent="Spacing/Row" unique_id=1521095991]
 layout_mode = 2
-theme = ExtResource("2_qm8qp")
+theme_type_variation = &"FontIconButton"
 text = ""
 
 [node name="DeleteBtn" type="Button" parent="Spacing/Row" unique_id=685540929]
 layout_mode = 2
-theme = ExtResource("2_qm8qp")
+theme_type_variation = &"FontIconButton"
 text = ""

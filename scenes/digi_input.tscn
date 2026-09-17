@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://sc2hkkrqud8f"]
+
+[ext_resource type="Script" uid="uid://rg0rcoltavub" path="res://scripts/DigiInput.gd" id="1_6ko8a"]
+[ext_resource type="FontFile" uid="uid://cs1kvw2o4ps8g" path="res://assets/fonts/DigitalDisplayRegular-ODEO.ttf" id="2_ooi2l"]
+[ext_resource type="FontFile" uid="uid://wjkb1ug2d3e2" path="res://assets/fonts/Font-Awesome-7-Free-Solid-900.otf" id="3_6ko8a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ko8a"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dxur"]
+content_margin_left = 8.0
+content_margin_right = 4.0
+bg_color = Color(0.23392546, 0.23392549, 0.23392531, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuf6t"]
+content_margin_left = 2.0
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48ytq"]
+content_margin_left = 4.0
+content_margin_right = 8.0
+bg_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[node name="DigiInput" type="PanelContainer" unique_id=2088483096]
+clip_children = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ko8a")
+script = ExtResource("1_6ko8a")
+
+[node name="Row" type="HBoxContainer" parent="." unique_id=1372088157]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SubBtn" type="Button" parent="Row" unique_id=2001673604]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_6ko8a")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5dxur")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5dxur")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5dxur")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_5dxur")
+theme_override_styles/focus = SubResource("StyleBoxFlat_5dxur")
+text = ""
+
+[node name="NumInput" type="LineEdit" parent="Row" unique_id=415983514]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 2
+theme_override_fonts/font = ExtResource("2_ooi2l")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_cuf6t")
+text = "00"
+alignment = 1
+select_all_on_focus = true
+
+[node name="AddBtn" type="Button" parent="Row" unique_id=179590527]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_6ko8a")
+theme_override_styles/normal = SubResource("StyleBoxFlat_48ytq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_48ytq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_48ytq")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_48ytq")
+theme_override_styles/focus = SubResource("StyleBoxFlat_48ytq")
+text = "+"
