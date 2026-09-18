@@ -6,25 +6,39 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llela"]
 content_margin_left = 10.0
-content_margin_right = 10.0
-border_width_left = 3
-border_width_top = 3
-border_width_bottom = 3
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.1254902, 0.5411765, 0.8627451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
 corner_radius_top_left = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvyoj"]
+content_margin_left = 2.0
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 2
+border_width_bottom = 2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ko8a"]
-content_margin_left = 10.0
+content_margin_left = 6.0
+content_margin_top = 6.0
 content_margin_right = 10.0
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
+content_margin_bottom = 6.0
+bg_color = Color(0.1254902, 0.5411765, 0.8627451, 1)
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 
-[node name="DigiInput" type="HBoxContainer" unique_id=83131873]
+[node name="DigiInput" type="HBoxContainer" unique_id=1907932524]
+clip_children = 2
 offset_right = 112.0
-offset_bottom = 23.0
+offset_bottom = 32.0
+size_flags_horizontal = 0
 theme_override_constants/separation = 0
 script = ExtResource("1_6ko8a")
 
@@ -36,10 +50,13 @@ text = "-"
 
 [node name="NumInput" type="LineEdit" parent="." unique_id=415983514]
 layout_mode = 2
+theme_override_constants/minimum_character_width = 2
 theme_override_fonts/font = ExtResource("2_ooi2l")
 theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_bvyoj")
 text = "00"
 alignment = 1
+select_all_on_focus = true
 
 [node name="AddBtn" type="Button" parent="." unique_id=179590527]
 layout_mode = 2

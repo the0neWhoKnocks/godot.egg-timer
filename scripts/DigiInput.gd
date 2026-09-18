@@ -3,12 +3,48 @@ class_name DigiInput extends HBoxContainer
 
 signal value_changed(val: int)
 
+@export var btn_color: Color = Color(Constants.BTN_COLOR__DEFAULT):
+  set(new_clr):
+    btn_color = new_clr
+    Utils.update_stylebox(
+      [Utils.StyleBoxState.NORMAL],
+      [
+        [sub_btn, ["bg_color"]],
+        [add_btn, ["bg_color"]],
+      ],
+      btn_color,
+    )
+@export var border_size: int = 2:
+   set(new_size):
+    border_size = new_size
+    Utils.update_stylebox(
+      [Utils.StyleBoxState.NORMAL],
+      [
+        [sub_btn, ["border_width_left", "border_width_top", "border_width_bottom"]],
+        [num_input, ["border_width_top", "border_width_bottom"]],
+        [add_btn, ["border_width_top", "border_width_right", "border_width_bottom"]],
+      ],
+      border_size,
+    )
+@export var corner_radius: int = 10:
+  set(new_radius):
+    corner_radius = new_radius
+    Utils.update_stylebox(
+      [Utils.StyleBoxState.NORMAL],
+      [
+        [sub_btn, ["corner_radius_top_left", "corner_radius_bottom_left"]],
+        [add_btn, ["corner_radius_top_right", "corner_radius_bottom_right"]],
+      ],
+      corner_radius,
+    )
 @export var max_value: int = 60 
 @export var min_value: int = 0 
 @export var step: int = 1
 @export var total_digits: int = 2:  # Number of digits to pad with zeros
   set(new_total):
     total_digits = new_total
+    num_input.max_length = total_digits
+    num_input.add_theme_constant_override("minimum_character_width", total_digits)
     _set_text(value)
 @export var value: int = 0:
   set(new_val):
