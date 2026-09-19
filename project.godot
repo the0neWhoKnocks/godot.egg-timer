@@ -32,6 +32,7 @@ window/stretch/aspect="expand"
 
 [gui]
 
+common/show_focus_state_on_pointer_event=0
 theme/custom="uid://d07in3wxtrnpq"
 
 [physics]
