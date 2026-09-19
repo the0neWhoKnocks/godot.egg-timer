@@ -158,7 +158,7 @@ func _update_ctrl_btn() -> void:
 
 
 func _validate(..._args) -> void:
-  if timer_name_input.text != "" || hours_input.value + minutes_input.value + seconds_input.value > 0:
+  if timer_name_input.text != "" && hours_input.value + minutes_input.value + seconds_input.value > 0:
     ctrl_btn.disabled = false
   else:
     ctrl_btn.disabled = true
