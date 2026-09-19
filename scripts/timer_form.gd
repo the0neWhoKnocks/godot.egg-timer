@@ -8,9 +8,9 @@ var uid: String = ""
 
 @onready var color_picker_btn: ColorPickerButton = $TimerColorPickerBtn
 @onready var ctrl_btn: Button = $CtrlBtn
-@onready var hours_input: PaddedSpinBox = $HoursInput
-@onready var minutes_input: PaddedSpinBox = $MinutesInput
-@onready var seconds_input: PaddedSpinBox = $SecondsInput
+@onready var hours_input: DigiInput = $HoursInput
+@onready var minutes_input: DigiInput = $MinutesInput
+@onready var seconds_input: DigiInput = $SecondsInput
 @onready var timer_name_input: LineEdit = $TimerNameInput
 @onready var timers_list: VBoxContainer = %TimersList
 
@@ -53,9 +53,9 @@ func _add_timer(_uid: String = "", timer_config: Dictionary = {}) -> EggTimer:
     timer = EggTimer.create(
       color,
       timer_name_input.text,
-      hours_input.get_text(),
-      minutes_input.get_text(),
-      seconds_input.get_text(),
+      hours_input.value,
+      minutes_input.value,
+      seconds_input.value,
     )
   
   timers_list.add_child(timer)
