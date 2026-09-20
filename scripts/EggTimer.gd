@@ -136,7 +136,7 @@ func render_timer(delta: float) -> void:
     var remaining_seconds = int(total_seconds - elapsed_seconds)
     var secs = remaining_seconds % 60
     var mins = (remaining_seconds / 60) % 60
-    var hrs = mins / 60
+    var hrs = (remaining_seconds / 3600) % 60
     var combined = hrs + mins + secs
     
     if combined > 0 && prev_time != combined :
