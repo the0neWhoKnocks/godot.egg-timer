@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cqiet3i1yyspc"]
 
-[ext_resource type="Script" uid="uid://cxi41ctax7cg7" path="res://scripts/egg_timer.gd" id="1_icbje"]
+[ext_resource type="Script" uid="uid://cxi41ctax7cg7" path="res://scripts/EggTimer.gd" id="1_icbje"]
 [ext_resource type="FontFile" uid="uid://cs1kvw2o4ps8g" path="res://assets/fonts/DigitalDisplayRegular-ODEO.ttf" id="3_nsx2x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nws1w"]
@@ -42,7 +42,6 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="EggTimer" type="PanelContainer" unique_id=478006003]
-anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 40.0
 grow_horizontal = 2
