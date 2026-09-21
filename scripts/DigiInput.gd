@@ -6,7 +6,9 @@ signal value_changed(val: int)
 var add_down: bool = false
 var speed_up_inc: float = 0
 var sub_down: bool = false
+var total_digits: int
 
+## Color of the up and down buttons.
 @export var btn_color: Color = Color("#3c3c3c"):
   set(new_clr):
     btn_color = new_clr
@@ -18,6 +20,7 @@ var sub_down: bool = false
       ],
       btn_color,
     )
+## Thickness of the border.
 @export var border_size: int = 1:
    set(new_size):
     border_size = new_size
@@ -30,6 +33,7 @@ var sub_down: bool = false
       ],
       border_size,
     )
+## How round the corners are.
 @export var corner_radius: int = 10:
   set(new_radius):
     corner_radius = new_radius
@@ -42,16 +46,20 @@ var sub_down: bool = false
       ],
       corner_radius,
     )
-@export var max_value: int = 60 
-@export var min_value: int = 0 
-@export var step: int = 1
-@export var total_digits: int = 2:  # Number of digits to pad with zeros
-  set(new_total):
-    total_digits = new_total
+## The highest value. This also determines how many zeros the visual value gets padded with.
+@export var max_value: int = 60:
+  set(max):
+    max_value = max
+    total_digits = str(max_value).length()
     if num_input:
-      num_input.max_length = total_digits
+      num_input.max_length = max_value
       num_input.add_theme_constant_override("minimum_character_width", total_digits)
       _set_text(value)
+## The lowest value.
+@export var min_value: int = 0
+## How much the value goes up with each tick.
+@export var step: int = 1
+## Starts with this value.
 @export var value: int = 0:
   set(new_val):
     value = clamp(new_val, min_value, max_value)
@@ -100,7 +108,6 @@ func _ready() -> void:
     max_value = max_value
     min_value = min_value
     step = step
-    total_digits = total_digits
     value = value
 
 
