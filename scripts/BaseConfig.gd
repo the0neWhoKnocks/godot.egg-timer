@@ -1,4 +1,4 @@
-class_name BaseConfig extends Node
+class_name BaseConfig extends RefCounted
 
 var PATH__USER_DATA = Utils.get_user_app_data_path()
 var data: Dictionary
