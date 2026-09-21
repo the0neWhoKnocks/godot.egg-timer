@@ -58,7 +58,10 @@ static func create(
   return timer
 
 
-# Called when the node enters the scene tree for the first time.
+func _process(delta: float) -> void:
+  if timer_running && !completed: _render_timer(delta)
+
+
 func _ready() -> void:
   _render_ui()
   
@@ -77,6 +80,7 @@ func _on_ctrl_btn_press() -> void:
   
   if !timer_running:
     elapsed_seconds = 0
+    prev_time = 0
     time_display.add_theme_color_override("font_color", timer_txt_color)
     _update_display(hours, minutes, seconds)
 
@@ -90,8 +94,21 @@ func _on_edit_btn_press() -> void:
   edit_timer.emit(uid)
 
 
-func _process(delta: float) -> void:
-  if timer_running && !completed: _render_timer(delta)
+func _render_timer(delta: float) -> void:
+  elapsed_seconds += delta
+  var remaining_seconds = int(total_seconds - elapsed_seconds)
+  var secs = remaining_seconds % 60
+  var mins = (remaining_seconds / 60) % 60
+  var hrs = (remaining_seconds / 3600) % 60
+  var combined = hrs + mins + secs
+  
+  if combined > 0 && prev_time != combined:
+    prev_time = combined
+    _update_display(hrs, mins, secs)
+  elif combined == 0:
+    completed = true
+    _update_display(hrs, mins, secs)
+    timer_complete.emit(uid)
 
 
 func _render_ui() -> void:
@@ -123,23 +140,6 @@ func _update_display(hrs: int, mins: int, secs: int) -> void:
     "minutes": str(mins).pad_zeros(2),
     "seconds": str(secs).pad_zeros(2),
   })
-
-
-func _render_timer(delta: float) -> void:
-  elapsed_seconds += delta
-  var remaining_seconds = int(total_seconds - elapsed_seconds)
-  var secs = remaining_seconds % 60
-  var mins = (remaining_seconds / 60) % 60
-  var hrs = (remaining_seconds / 3600) % 60
-  var combined = hrs + mins + secs
-  
-  if combined > 0 && prev_time != combined :
-    prev_time = combined
-    _update_display(hrs, mins, secs)
-  elif combined == 0 :
-    completed = true
-    _update_display(hrs, mins, secs)
-    timer_complete.emit(uid)
 
 
 func update(conf_data: Dictionary) -> void:
