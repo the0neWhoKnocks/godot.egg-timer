@@ -34,9 +34,9 @@ func _add_timer(timer_config: Dictionary = {}, uid: String = "") -> void:
   if uid != "": create_args.push_back(uid)
   
   var timer: EggTimer = EggTimer.create.callv(create_args)
+  if uid == "": config.set_timer(timer.uid, timer_config)
   
   timers_list.add_child(timer)
-  config.set_timer(timer.uid, timer_config)
   
   _sort_timers()
   
