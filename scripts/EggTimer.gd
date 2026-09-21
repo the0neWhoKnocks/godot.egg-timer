@@ -2,9 +2,13 @@ class_name EggTimer extends PanelContainer
 
 const EGG_TIMER = preload("res://scenes/egg_timer.tscn")
 
-var blink: bool = false
-var blink_secs = 0
+signal completed_timer_stopped(uid: String)
+signal delete_timer(uid: String)
+signal edit_timer(uid: String)
+signal timer_complete(uid: String)
+
 var color: String = "#000000"
+var completed: bool = false
 var ctrl_styles: Dictionary = {
   "play": {
     "color": "#3e9881",
@@ -19,7 +23,6 @@ var elapsed_seconds: float = 0
 var hours: int = 0
 var label: String = "TIMER_NAME"
 var minutes: int = 0
-var prev_blink_secs: int = 0
 var prev_time: int = 0
 var seconds: int = 0
 var timer_running: bool = false
@@ -62,44 +65,33 @@ func _ready() -> void:
   ctrl_btn.pressed.connect(_on_ctrl_btn_press)
   edit_btn.pressed.connect(_on_edit_btn_press)
   delete_btn.pressed.connect(_on_delete_btn_press)
-  App.config.timer_config_changed.connect(_on_config_change)
-
-
-func _on_config_change(conf_uid: String, conf_data: Dictionary) -> void:
-  if conf_uid == uid:
-    color = conf_data["color"]
-    label = conf_data["name"]
-    hours = conf_data["hours"]
-    minutes = conf_data["mins"]
-    seconds = conf_data["secs"]
-    _render_ui()
 
 
 func _on_ctrl_btn_press() -> void:
   timer_running = !timer_running
-  update_ctrl_styles()
+  _update_ctrl_styles()
   
-  if !timer_running :
-    blink = false
-    blink_secs = 0
+  if completed:
+    completed = false
+    completed_timer_stopped.emit(uid)
+  
+  if !timer_running:
     elapsed_seconds = 0
-    prev_blink_secs = 0
     time_display.add_theme_color_override("font_color", timer_txt_color)
-    update_display(hours, minutes, seconds)
+    _update_display(hours, minutes, seconds)
 
 
 func _on_delete_btn_press() -> void:
-  App.config.delete_timer(uid)
+  delete_timer.emit(uid)
   queue_free()
 
 
 func _on_edit_btn_press() -> void:
-  App.edit_timer.emit(uid)
+  edit_timer.emit(uid)
 
 
 func _process(delta: float) -> void:
-  render_timer(delta)
-  render_blink(delta)
+  if timer_running && !completed: _render_timer(delta)
 
 
 func _render_ui() -> void:
@@ -107,11 +99,11 @@ func _render_ui() -> void:
   chip_style.bg_color = Color(color)
   color_chip.add_theme_stylebox_override("panel", chip_style)
   
-  update_ctrl_styles()
+  _update_ctrl_styles()
   timer_txt_color = time_display.get_theme_color("font_color")
   timer_txt_color_dim = Color(timer_txt_color, 0.5)
   
-  update_display(hours, minutes, seconds)
+  _update_display(hours, minutes, seconds)
   timer_name.text = label
   edit_btn.text = Constants.ICON__EDIT
   delete_btn.text = Constants.ICON__DELETE
@@ -119,43 +111,41 @@ func _render_ui() -> void:
   total_seconds = (hours * 3600) + (minutes * 60) + seconds
 
 
-func render_blink(delta: float) -> void:
-  if blink :
-    blink_secs += delta
-    if int(blink_secs) != prev_blink_secs :
-      prev_blink_secs = int(blink_secs)
-      if int(blink_secs) % 2 == 0 :
-        time_display.add_theme_color_override("font_color", timer_txt_color)
-      else:
-        time_display.add_theme_color_override("font_color", timer_txt_color_dim)
-
-
-func render_timer(delta: float) -> void:
-  if timer_running && !blink :
-    elapsed_seconds += delta
-    var remaining_seconds = int(total_seconds - elapsed_seconds)
-    var secs = remaining_seconds % 60
-    var mins = (remaining_seconds / 60) % 60
-    var hrs = (remaining_seconds / 3600) % 60
-    var combined = hrs + mins + secs
-    
-    if combined > 0 && prev_time != combined :
-      prev_time = combined
-      update_display(hrs, mins, secs)
-    elif combined == 0 :
-      blink = true
-      update_display(hrs, mins, secs)
-
-
-func update_ctrl_styles() -> void:
+func _update_ctrl_styles() -> void:
   var styles = ctrl_styles["stop"] if timer_running else ctrl_styles["play"]
   Utils.add_btn_style_override(ctrl_btn, styles["color"])
   ctrl_btn.text = styles["icon"]
 
 
-func update_display(hrs: int, mins: int, secs: int) -> void:
+func _update_display(hrs: int, mins: int, secs: int) -> void:
   time_display.text = "{hours}:{minutes}:{seconds}".format({
     "hours": str(hrs).pad_zeros(2),
     "minutes": str(mins).pad_zeros(2),
     "seconds": str(secs).pad_zeros(2),
   })
+
+
+func _render_timer(delta: float) -> void:
+  elapsed_seconds += delta
+  var remaining_seconds = int(total_seconds - elapsed_seconds)
+  var secs = remaining_seconds % 60
+  var mins = (remaining_seconds / 60) % 60
+  var hrs = (remaining_seconds / 3600) % 60
+  var combined = hrs + mins + secs
+  
+  if combined > 0 && prev_time != combined :
+    prev_time = combined
+    _update_display(hrs, mins, secs)
+  elif combined == 0 :
+    completed = true
+    _update_display(hrs, mins, secs)
+    timer_complete.emit(uid)
+
+
+func update(conf_data: Dictionary) -> void:
+  color = conf_data["color"]
+  label = conf_data["name"]
+  hours = conf_data["hours"]
+  minutes = conf_data["mins"]
+  seconds = conf_data["secs"]
+  _render_ui()

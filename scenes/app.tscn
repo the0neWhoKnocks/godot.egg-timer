@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://brb4rbxjomral"]
 
-[ext_resource type="Script" uid="uid://7to4ji0lsty3" path="res://scripts/timer_form.gd" id="1_0wu41"]
+[ext_resource type="Script" uid="uid://7to4ji0lsty3" path="res://scripts/TimerForm.gd" id="1_0wu41"]
+[ext_resource type="Script" uid="uid://ckxqykp1tyss1" path="res://scripts/App.gd" id="1_dmsei"]
 [ext_resource type="PackedScene" uid="uid://sc2hkkrqud8f" path="res://scenes/digi_input.tscn" id="2_awiwq"]
+[ext_resource type="AudioStream" uid="uid://31ajgcxxbwqh" path="res://assets/alarm.wav" id="2_cl6f3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6d74"]
 content_margin_left = 4.0
@@ -16,15 +18,6 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_llela"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1670a"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_size = 2
-shadow_offset = Vector2(0, 2)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmsei"]
 bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 10
@@ -35,6 +28,15 @@ shadow_size = 2
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_awiwq"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ljqyw"]
 bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -65,6 +67,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_dmsei")
+
+[node name="Alarm" type="AudioStreamPlayer" parent="." unique_id=1996563304]
+stream = ExtResource("2_cl6f3")
 
 [node name="Body" type="VBoxContainer" parent="." unique_id=27218072]
 layout_mode = 2
@@ -110,7 +116,8 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_llela")
 
 [node name="HoursInput" parent="Body/TimerFormSpacing/TimerForm" unique_id=2088483096 instance=ExtResource("2_awiwq")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1670a")
+theme_override_styles/panel = SubResource("StyleBoxFlat_dmsei")
+max_value = 24
 
 [node name="Colon1" type="Label" parent="Body/TimerFormSpacing/TimerForm" unique_id=241902242]
 layout_mode = 2
@@ -118,7 +125,8 @@ text = ":"
 
 [node name="MinutesInput" parent="Body/TimerFormSpacing/TimerForm" unique_id=975086022 instance=ExtResource("2_awiwq")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_dmsei")
+theme_override_styles/panel = SubResource("StyleBoxFlat_awiwq")
+max_value = 59
 
 [node name="Colon2" type="Label" parent="Body/TimerFormSpacing/TimerForm" unique_id=234184751]
 layout_mode = 2
@@ -126,7 +134,8 @@ text = ":"
 
 [node name="SecondsInput" parent="Body/TimerFormSpacing/TimerForm" unique_id=150026467 instance=ExtResource("2_awiwq")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_awiwq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ljqyw")
+max_value = 59
 
 [node name="Spacer3" type="Panel" parent="Body/TimerFormSpacing/TimerForm" unique_id=1078795517]
 custom_minimum_size = Vector2(15, 0)

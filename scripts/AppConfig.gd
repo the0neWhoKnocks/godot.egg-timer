@@ -2,8 +2,6 @@ class_name AppConfig extends BaseConfig
 
 var timers: Dictionary = {}
 
-signal timer_config_changed(uid: String, data: Dictionary)
-
 func _init() -> void:
   super("eggtimer")
   
@@ -19,9 +17,7 @@ func get_timer(uid: String) -> Dictionary:
   return timers[uid]
 
 
-func set_timer(uid: String, timer_data: Dictionary, changed: bool = false) -> void:
+func set_timer(uid: String, timer_data: Dictionary) -> void:
   timers[uid] = timer_data
   save_file()
-  if changed:
-    timer_config_changed.emit(uid, timer_data)
   
