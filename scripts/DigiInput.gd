@@ -62,11 +62,22 @@ var total_digits: int
 ## Starts with this value.
 @export var value: int = 0:
   set(new_val):
-    value = clamp(new_val, min_value, max_value)
+    if wrap_around:
+      if new_val > max_value:
+        value = (max_value - new_val) + 1
+      elif new_val < min_value:
+        value = max_value - (min_value - new_val) + 1
+      else:
+        value = new_val
+    else:
+      value = clamp(new_val, min_value, max_value)
+    
     if num_input && num_input.text != str(value):
       num_input.text = str(value)
       _set_text(value)
       value_changed.emit(value)
+## If the value goes over the [b][color=orange]Max Value[/color][/b] it'll wrap to the [b][color=yellow]Min Value[/color][/b] and visa versa.
+@export var wrap_around: bool = true
 
 @onready var add_btn: Button = $Row/AddBtn
 @onready var num_input: LineEdit = $Row/NumInput

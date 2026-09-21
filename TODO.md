@@ -1,7 +1,6 @@
 # TODO
 ---
 
-- [ ] DigiInput wrap from max to min and visa versa.
 - [ ] DigiInput if wrap disabled, disable sub/add buttons when min/max reached.
 
 - [ ] Rename config file to match what currently exists.
