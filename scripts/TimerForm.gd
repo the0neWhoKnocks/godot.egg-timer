@@ -39,11 +39,28 @@ func _on_color_changed(col: Color) -> void:
 
 func _on_color_picker_created() -> void:
   var picker: ColorPicker = color_picker_btn.get_picker()
+  var popup: PopupPanel = picker.get_parent()
+  
   picker.sliders_visible = false
   picker.presets_visible = false
   picker.color_modes_visible = false
   picker.edit_alpha = false
-  picker.scale = Vector2(0.75, 0.75)
+  
+  # Scale the picker to fit within the project's bounds.
+  var max_height = get_viewport().get_visible_rect().size.y
+  if picker.size.y > max_height:
+    # NOTE: No idea what these are, but theoretically the width/height of the picker should roughly match the popup width/height. Instead, after I scale the picker there's this empty space on the side/bottom that I have to account for.
+    var gutter_width: int = 375
+    var gutter_height: int = 490
+    
+    var _scale: float = 0.7
+    var max_width = (picker.size.x - gutter_width) * _scale
+    max_height = (picker.size.y - gutter_height) * _scale
+    # scale the elements
+    picker.scale = Vector2(_scale, _scale)
+    # scale the transparent black square behind the elements
+    popup.max_size.x = int(max_width)
+    popup.max_size.y = int(max_height)
 
 
 func _on_ctrl_button_pressed() -> void:

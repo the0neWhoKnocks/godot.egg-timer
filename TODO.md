@@ -8,9 +8,3 @@
     - For Linux: `$HOME/.local/share/applications/eggtimer.desktop`.
     - For OSX: ??.
     - For Windows: ??.
-
----
-
-## Fix
-
-- [ ] color picker size - empty black area on side
