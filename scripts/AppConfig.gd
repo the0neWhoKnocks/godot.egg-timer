@@ -3,7 +3,7 @@ class_name AppConfig extends BaseConfig
 var timers: Dictionary = {}
 
 func _init() -> void:
-  super("eggtimer")
+  super("eggtimer", "config2")
   
   if !data["timers"]: data["timers"] = timers
   else: timers = data["timers"]
@@ -20,4 +20,3 @@ func get_timer(uid: String) -> Dictionary:
 func set_timer(uid: String, timer_data: Dictionary) -> void:
   timers[uid] = timer_data
   save_file()
-  

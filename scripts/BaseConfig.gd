@@ -6,9 +6,9 @@ var dir: String
 var file: String
 
 
-func _init(app_name: String) -> void:
+func _init(app_name: String, config_name: String = "config") -> void:
   dir = PATH__USER_DATA + "/" + app_name
-  file = dir + "/config2.json"
+  file = dir + "/" + config_name + ".json"
   data = {}
   load_file()
 
