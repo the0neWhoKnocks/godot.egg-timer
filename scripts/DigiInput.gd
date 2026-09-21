@@ -71,6 +71,11 @@ var total_digits: int
         value = new_val
     else:
       value = clamp(new_val, min_value, max_value)
+      if value == min_value: sub_btn.disabled = true
+      elif value == max_value: add_btn.disabled = true
+      elif add_btn.disabled || sub_btn.disabled:
+        add_btn.disabled = false
+        sub_btn.disabled = false
     
     if num_input && num_input.text != str(value):
       num_input.text = str(value)
