@@ -1,7 +1,7 @@
 # TODO
 ---
 
-- [ ] Rename config file to match what currently exists.
+- [ ] Compile to Linux binary?
 - [ ] Create installer:
     - For Linux: Drop into `$HOME/.local/bin`.
 - [ ] Create launcher:
