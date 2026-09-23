@@ -14,6 +14,7 @@ config/name="Egg Timer"
 config/version="1.0.0"
 run/main_scene="uid://brb4rbxjomral"
 config/features=PackedStringArray("4.7", "Forward Plus")
+config/icon="uid://dqswqbbcw8r1j"
 
 [autoload]
 

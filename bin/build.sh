@@ -11,7 +11,8 @@ godot --headless --export-release "Linux"
 
 export FP__APP_ID="org.lemlab.EggTimer"
 export FP__COMMAND="eggtimer"
-export PATH__ASSETS_DIR="$PWD/bin/assets"
+export PATH__ASSETS_DIR="$PWD/assets"
+export PATH__BIN_ASSETS_DIR="$PWD/bin/assets"
 export PATH__BUILD_DIR="$PWD/.build"
 export PATH__DIST_DIR="$PWD/dist"
 
@@ -20,7 +21,7 @@ export PATH__DIST_DIR="$PWD/dist"
 # do not match, the desktop environment will fail to map the icon to your
 # running window.
 mkdir -p "$PATH__BUILD_DIR"
-cp "$PATH__ASSETS_DIR/launcher.desktop" "$PATH__BUILD_DIR/$FP__APP_ID.desktop"
+cp "$PATH__BIN_ASSETS_DIR/launcher.desktop" "$PATH__BUILD_DIR/$FP__APP_ID.desktop"
   sed -i "s/{FP__COMMAND}/$FP__COMMAND/g" "$PATH__BUILD_DIR/$FP__APP_ID.desktop"
   sed -i "s/{FP__ICON}/$FP__APP_ID/g" "$PATH__BUILD_DIR/$FP__APP_ID.desktop"
 cp "$PATH__ASSETS_DIR/icons/app.svg" "$PATH__BUILD_DIR/$FP__APP_ID.svg"
