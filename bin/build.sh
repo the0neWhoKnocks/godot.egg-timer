@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+export PATH__DIST_DIR="$PWD/dist"
+
+rm -rf "$PATH__DIST_DIR/"*
+
 # Godot ------------------------------------------------------------------------
 
 # Export Production build:
@@ -14,7 +18,6 @@ export FP__COMMAND="eggtimer"
 export PATH__ASSETS_DIR="$PWD/assets"
 export PATH__BIN_ASSETS_DIR="$PWD/bin/assets"
 export PATH__BUILD_DIR="$PWD/.build"
-export PATH__DIST_DIR="$PWD/dist"
 
 # The desktop file and the icon file name must match the `app-id` (e.g., 
 # `org.example.MyBinaryApp.desktop` and `org.example.MyBinaryApp.png`). If they
