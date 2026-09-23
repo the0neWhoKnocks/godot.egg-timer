@@ -31,7 +31,6 @@ var timer_txt_color_dim: Color
 var total_seconds: int = 0
 var uid: String
 
-@onready var color_chip: Panel = $Spacing/Row/ColorChip
 @onready var ctrl_btn: Button = $Spacing/Row/CtrlBtn
 @onready var delete_btn: Button = $Spacing/Row/DeleteBtn
 @onready var edit_btn: Button = $Spacing/Row/EditBtn
@@ -112,9 +111,9 @@ func _render_timer(delta: float) -> void:
 
 
 func _render_ui() -> void:
-  var chip_style: StyleBox = color_chip.get_theme_stylebox("panel").duplicate()
-  chip_style.bg_color = Color(color)
-  color_chip.add_theme_stylebox_override("panel", chip_style)
+  var body_style: StyleBox = self.get_theme_stylebox("panel").duplicate()
+  body_style.bg_color = Color(color, 0.25)
+  self.add_theme_stylebox_override("panel", body_style)
   
   _update_ctrl_styles()
   timer_txt_color = time_display.get_theme_color("font_color")

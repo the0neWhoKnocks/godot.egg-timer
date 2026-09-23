@@ -25,6 +25,10 @@ content_margin_top = 5.0
 content_margin_right = 4.0
 content_margin_bottom = 5.0
 bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -60,14 +64,14 @@ theme_override_constants/margin_bottom = 2
 [node name="Row" type="HBoxContainer" parent="Spacing" unique_id=326153005]
 layout_mode = 2
 
-[node name="ColorChip" type="Panel" parent="Spacing/Row" unique_id=564440331]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-
 [node name="CtrlBtn" type="Button" parent="Spacing/Row" unique_id=1395826939]
 layout_mode = 2
 theme_type_variation = &"FontIconButton"
 text = ""
+
+[node name="Spacer" type="Control" parent="Spacing/Row" unique_id=1981373152]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
 
 [node name="TimeDisplayContainer" type="PanelContainer" parent="Spacing/Row" unique_id=1777861067]
 layout_mode = 2
@@ -89,11 +93,17 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_8bg7t")
 text = "00:00:00"
 vertical_alignment = 1
 
+[node name="Spacer2" type="Control" parent="Spacing/Row" unique_id=624781268]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+
 [node name="TimerName" type="Label" parent="Spacing/Row" unique_id=1049160005]
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "PLACEHOLDER"
 
 [node name="EmptySpacer" type="Control" parent="Spacing/Row" unique_id=1488381269]
+custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
