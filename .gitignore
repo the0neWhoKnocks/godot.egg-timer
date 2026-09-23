@@ -4,5 +4,7 @@
 /android/
 
 # Project ignores
+.build
+.flatpak-builder
 .ignore
-/dist
+/dist/*

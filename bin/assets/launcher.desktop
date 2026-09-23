@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Egg Timer (Godot)
+Comment=App to set multiple timers
+Exec={FP__COMMAND}
+Icon={FP__ICON}
+Terminal=false
+Type=Application
+Categories=Utility;Application;

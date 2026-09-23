@@ -1,20 +1,20 @@
 class_name BaseConfig extends RefCounted
 
-var PATH__USER_DATA = Utils.get_user_app_data_path()
+var PATH__USER_DATA: String = Utils.get_user_app_data_path()
 var data: Dictionary
 var dir: String
 var file: String
 
 
 func _init(app_name: String, config_name: String = "config") -> void:
-  dir = PATH__USER_DATA + "/" + app_name
+  dir = PATH__USER_DATA if Env.get_flatpak_id() else PATH__USER_DATA + "/" + app_name
   file = dir + "/" + config_name + ".json"
   data = {}
   load_file()
 
 
 func load_file() -> void:
-  if FileAccess.file_exists(file) :
+  if FileAccess.file_exists(file):
     var raw_data = FileAccess.get_file_as_string(file)
     var json_data = JSON.parse_string(raw_data)
     data = json_data if json_data != null else {}

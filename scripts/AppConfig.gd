@@ -3,10 +3,7 @@ class_name AppConfig extends BaseConfig
 var timers: Dictionary = {}
 
 func _init() -> void:
-  super("eggtimer")
-  
-  if !data["timers"]: data["timers"] = timers
-  else: timers = data["timers"]
+  super("eggtimer", "app")
 
 
 func delete_timer(uid: String) -> void:
@@ -19,6 +16,10 @@ func get_timer(uid: String) -> Dictionary:
 
 func load_file() -> void:
   super()
+  
+  if !data.has("timers"): data["timers"] = timers
+  else: timers = data["timers"]
+  
   # Ensure timer data matches what is expected
   for uid in data["timers"]:
     var timer: Dictionary = data["timers"][uid]

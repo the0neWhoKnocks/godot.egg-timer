@@ -83,6 +83,9 @@ static func get_user_app_data_path() -> String:
   var HOME: String = get_user_home_path()
   var data_path: String
   
+  # Inside a FP Sandbox
+  if Env.get_flatpak_id(): return "/var/config"
+  
   match OS.get_name():
     "Linux", "X11": # "X11" is commonly returned in older Godot versions or specific configurations
       data_path = HOME + "/.config"

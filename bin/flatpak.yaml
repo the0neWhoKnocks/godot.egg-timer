@@ -1,0 +1,33 @@
+id: ${FP__APP_ID}
+runtime: "org.freedesktop.Platform"
+runtime-version: "26.08"
+sdk: org.freedesktop.Sdk
+command: ${FP__COMMAND}
+finish-args: # Specify sandbox permissions so the App can access video/audio.
+  # - --device=all # Grants access to hardware devices under /dev, which is required for webcams / video capture devices and direct graphics acceleration.
+  # - --filesystem=home # permission to save data in ~/.var
+  - --device=dri # Allows sharing an accelerated graphics display or memory area.
+  - --share=ipc # Allows Inter-Process Communication, which is necessary for smooth video rendering and audio synchronization between your app and the X11/Wayland windows.
+  - --socket=fallback-x11 # Use X11 if Wayland isn't available.
+  - --socket=wayland # Use Wayland if it's available.
+  - --socket=pulseaudio # Grants access to the audio server. This works for both native PulseAudio and modern PipeWire setups (via the PipeWire-Pulse compatibility layer).
+modules:
+  - name: app
+    buildsystem: simple
+    build-commands:
+      # Install the app
+      - install -D ${FP__COMMAND} ${FLATPAK_DEST}/bin/${FP__COMMAND}
+      # Install the app launcher
+      - install -D ${FP__APP_ID}.desktop ${FLATPAK_DEST}/share/applications/${FP__APP_ID}.desktop
+      # Install the app icons
+      - install -D ${FP__APP_ID}.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FP__APP_ID}.svg
+      - install -D ${FP__APP_ID}-symbolic.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FP__APP_ID}-symbolic.svg
+    sources:
+      - type: file
+        path: ${PATH__DIST_DIR}/${FP__COMMAND}
+      - type: file
+        path: ${PATH__BUILD_DIR}/${FP__APP_ID}.desktop
+      - type: file
+        path: ${PATH__BUILD_DIR}/${FP__APP_ID}.svg
+      - type: file
+        path: ${PATH__BUILD_DIR}/${FP__APP_ID}-symbolic.svg

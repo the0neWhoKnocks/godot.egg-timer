@@ -175,5 +175,3 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[connection signal="picker_created" from="Body/TimerFormSpacing/TimerForm/TimerColorPickerBtn" to="Body/TimerFormSpacing/TimerForm" method="_on_color_picker_created"]

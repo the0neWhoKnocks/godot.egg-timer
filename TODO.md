@@ -1,13 +1,7 @@
 # TODO
 ---
 
-- [ ] Compile to Linux binary?
-    - Add semver to build name on Export?
-        - "godot export create file with semver tacked on"
-        - https://store.godotengine.org/asset/bearlikelion/export-auto-version/
-- [ ] Create installer:
-    - For Linux: Drop into `$HOME/.local/bin`.
-- [ ] Create launcher:
-    - For Linux: `$HOME/.local/share/applications/eggtimer.desktop`.
-    - For OSX: ??.
-    - For Windows: ??.
+- [ ] remove timer color chip, instead try setting it as a BG of the timer
+- [ ] Change icons:
+    - Displayed for the App window (top left of window)?
+    - In the System tray

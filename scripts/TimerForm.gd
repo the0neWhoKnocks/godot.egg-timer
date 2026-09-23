@@ -23,6 +23,7 @@ func _ready() -> void:
   
   color_picker_btn.color = color
   color_picker_btn.color_changed.connect(_on_color_changed)
+  color_picker_btn.picker_created.connect(_on_color_picker_created)
   
   _update_ctrl_btn()
   ctrl_btn.pressed.connect(_on_ctrl_button_pressed)
