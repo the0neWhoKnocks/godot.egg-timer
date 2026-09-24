@@ -1,4 +1,5 @@
 @tool
+@icon("res://editor/icons/digit_input.svg")
 class_name DigiInput extends PanelContainer
 
 signal value_changed(val: int)
