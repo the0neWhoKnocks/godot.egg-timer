@@ -19,7 +19,7 @@ corner_radius_bottom_left = 5
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_llela"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_awiwq"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -28,7 +28,7 @@ shadow_size = 2
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ljqyw"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -37,7 +37,7 @@ shadow_size = 2
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jv7dx"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -117,24 +117,27 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_llela")
 [node name="HoursInput" parent="Body/TimerFormSpacing/TimerForm" unique_id=2088483096 instance=ExtResource("2_awiwq")]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_awiwq")
+border_size = 2
 max_value = 24
 
 [node name="Colon1" type="Label" parent="Body/TimerFormSpacing/TimerForm" unique_id=241902242]
 layout_mode = 2
 text = ":"
 
-[node name="MinutesInput" parent="Body/TimerFormSpacing/TimerForm" unique_id=975086022 instance=ExtResource("2_awiwq")]
+[node name="MinutesInput" parent="Body/TimerFormSpacing/TimerForm" unique_id=1165783813 instance=ExtResource("2_awiwq")]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ljqyw")
+border_size = 2
 max_value = 59
 
 [node name="Colon2" type="Label" parent="Body/TimerFormSpacing/TimerForm" unique_id=234184751]
 layout_mode = 2
 text = ":"
 
-[node name="SecondsInput" parent="Body/TimerFormSpacing/TimerForm" unique_id=150026467 instance=ExtResource("2_awiwq")]
+[node name="SecondsInput" parent="Body/TimerFormSpacing/TimerForm" unique_id=2022904618 instance=ExtResource("2_awiwq")]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jv7dx")
+border_size = 2
 max_value = 59
 
 [node name="Spacer3" type="Panel" parent="Body/TimerFormSpacing/TimerForm" unique_id=1078795517]

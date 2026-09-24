@@ -17,10 +17,9 @@ var total_digits: int
     if not is_node_ready(): await ready
     
     Utils.update_stylebox(
-      [Utils.StyleBoxState.NORMAL],
+      [Utils.StyleBoxState.PANEL],
       [
-        [sub_btn, ["bg_color"]],
-        [add_btn, ["bg_color"]],
+        [self, ["bg_color"]],
       ],
       btn_color,
     )

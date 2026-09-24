@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://wjkb1ug2d3e2" path="res://assets/fonts/Font-Awesome-7-Free-Solid-900.otf" id="3_6ko8a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ko8a"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -15,12 +15,12 @@ shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dxur"]
 content_margin_left = 8.0
-content_margin_right = 4.0
-bg_color = Color(0.23392546, 0.23392549, 0.23392531, 1)
+content_margin_right = 6.0
+bg_color = Color(0.23529412, 0.23529412, 0.23529412, 0)
 border_width_left = 1
 border_width_top = 1
 border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
+border_color = Color(0.23529412, 0.23529412, 0.23529412, 0)
 corner_radius_top_left = 10
 corner_radius_bottom_left = 10
 
@@ -29,16 +29,20 @@ content_margin_left = 2.0
 bg_color = Color(0, 0, 0, 1)
 border_width_top = 1
 border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
+border_color = Color(0.23529412, 0.23529412, 0.23529412, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48ytq"]
-content_margin_left = 4.0
+content_margin_left = 6.0
 content_margin_right = 8.0
-bg_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
+bg_color = Color(0.23529412, 0.23529412, 0.23529412, 0)
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
+border_color = Color(0.23529412, 0.23529412, 0.23529412, 0)
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 
@@ -53,7 +57,9 @@ theme_override_constants/separation = 0
 
 [node name="SubBtn" type="Button" parent="Row" unique_id=2001673604]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.627451)
 theme_override_fonts/font = ExtResource("3_6ko8a")
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_5dxur")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_5dxur")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5dxur")
@@ -73,7 +79,9 @@ select_all_on_focus = true
 
 [node name="AddBtn" type="Button" parent="Row" unique_id=179590527]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.627451)
 theme_override_fonts/font = ExtResource("3_6ko8a")
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_48ytq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_48ytq")
 theme_override_styles/hover = SubResource("StyleBoxFlat_48ytq")
