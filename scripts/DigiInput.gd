@@ -13,6 +13,9 @@ var total_digits: int
 @export var btn_color: Color = Color("#3c3c3c"):
   set(new_clr):
     btn_color = new_clr
+    
+    if not is_node_ready(): await ready
+    
     Utils.update_stylebox(
       [Utils.StyleBoxState.NORMAL],
       [
@@ -21,10 +24,14 @@ var total_digits: int
       ],
       btn_color,
     )
+
 ## Thickness of the border.
 @export var border_size: int = 1:
    set(new_size):
     border_size = new_size
+    
+    if not is_node_ready(): await ready
+    
     Utils.update_stylebox(
       [Utils.StyleBoxState.NORMAL],
       [
@@ -34,10 +41,14 @@ var total_digits: int
       ],
       border_size,
     )
+
 ## How round the corners are.
 @export var corner_radius: int = 10:
   set(new_radius):
     corner_radius = new_radius
+    
+    if not is_node_ready(): await ready
+    
     Utils.update_stylebox(
       [Utils.StyleBoxState.NORMAL, Utils.StyleBoxState.PANEL],
       [
@@ -47,15 +58,19 @@ var total_digits: int
       ],
       corner_radius,
     )
+
 ## The highest value. This also determines how many zeros the visual value gets padded with.
 @export var max_value: int = 60:
   set(max):
     max_value = max
     total_digits = str(max_value).length()
-    if num_input:
-      num_input.max_length = max_value
-      num_input.add_theme_constant_override("minimum_character_width", total_digits)
-      _set_text(value)
+    
+    if not is_node_ready(): await ready
+    
+    num_input.max_length = max_value
+    num_input.add_theme_constant_override("minimum_character_width", total_digits)
+    _set_text(value)
+
 ## The lowest value.
 @export var min_value: int = 0
 ## How much the value goes up with each tick.
@@ -63,6 +78,8 @@ var total_digits: int
 ## Starts with this value.
 @export var value: int = 0:
   set(new_val):
+    if not is_node_ready(): await ready
+    
     if wrap_around:
       if new_val > max_value:
         value = (max_value - new_val) + 1
@@ -82,6 +99,7 @@ var total_digits: int
       num_input.text = str(value)
       _set_text(value)
       value_changed.emit(value)
+
 ## If the value goes over the [b][color=orange]Max Value[/color][/b] it'll wrap to the [b][color=yellow]Min Value[/color][/b] and visa versa.
 @export var wrap_around: bool = true
 
@@ -109,7 +127,7 @@ func _ready() -> void:
   
   Utils.dupe_stylebox(num_input, "normal", ["normal"])
   num_input.text_submitted.connect(_on_text_change)
-  num_input.focus_exited.connect(func(): _on_text_change(num_input.text))
+  num_input.focus_exited.connect(_on_text_change.bind(num_input.text))
   _set_text(value)
   
   add_btn.text = Constants.ICON__PLUS
@@ -117,15 +135,6 @@ func _ready() -> void:
   add_btn.button_down.connect(_on_increase_down)
   add_btn.button_up.connect(_on_increase_up)
   add_btn.pressed.connect(_on_increase)
-  
-  if !Engine.is_editor_hint(): # TODO: gotta be a better way to do this
-    btn_color = btn_color
-    border_size = border_size
-    corner_radius = corner_radius
-    max_value = max_value
-    min_value = min_value
-    step = step
-    value = value
 
 
 func _on_decrease() -> void:
@@ -166,9 +175,9 @@ func _set_text(txt: int) -> void:
   num_input.text = str(txt).pad_zeros(total_digits)
 
 
-func _speed_up_inc(fn: Callable, delta) -> void:
-  var pad = 0.2 if speed_up_inc > 10 else 0.1 if speed_up_inc > 5 else 0.05
-  var new_inc = int(speed_up_inc + delta + pad)
+func _speed_up_inc(fn: Callable, delta: float) -> void:
+  var pad: float = 0.2 if speed_up_inc > 10 else 0.1 if speed_up_inc > 5 else 0.05
+  var new_inc: int = int(speed_up_inc + delta + pad)
   
   if new_inc > speed_up_inc: fn.call()
   
